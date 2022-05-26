@@ -20,7 +20,11 @@ export const Button = ({item}:{item: ObjetInTable}) => {
       >
         {`${Math.round((item.amount / summ[currentIndex]) * 100)}%`}
       </button>
-      <div className="percentage--background" style={{ "width": `${((item.amount / summ[currentIndex]) * 100)}%` }}></div>
+      <div 
+        className="percentage--background"
+        style={{ "width": `${((item.amount / summ[currentIndex]) * 100)}%` }}
+      >
+      </div>
     </div>
   );
 };

@@ -15,7 +15,7 @@ interface allContextType {
   },
 
   ContexTable: {
-    table: ObjetInTable[][], 
+    table: ObjetInTable[][],
     setTable: Dispatch<React.SetStateAction<ObjetInTable[][]>>
   },
 
@@ -44,7 +44,7 @@ interface allContextType {
     handleNchangr: (e: React.ChangeEvent<HTMLInputElement>) => void,
     currentSum: (all: any, m: number, n: number) => number[] | [],
     currentRound: (all: any, n: number, m: number) => number[] | [],
-    makeTable: ({m, n}: {m: number, n:number}) => {},
+    makeTable: ({ m, n }: { m: number, n: number }) => {},
     setTableAction: () => void,
     clickCount: (item: ObjetInTable, table: ObjetInTable[][]) => void,
     addNewRow: (table: ObjetInTable[][]) => void,
@@ -61,77 +61,81 @@ export const allContext = React.createContext<allContextType>({
       n: 0
     },
 
-    setMn: (a) => {},
+    setMn: (a) => { },
   },
 
   ContexTable: {
     table: [[]],
-    setTable: () => {}
+    setTable: () => { }
   },
 
   ContextSumm: {
     summ: [],
-    setSumm: () => {}
+    setSumm: () => { }
   },
 
   ContextRound: {
     round: [],
-    setRound: () => {}
+    setRound: () => { }
   },
 
   ContextCurrentAmount: {
     currentAmount: -1,
-    setCurrentAmount: () => {}
+    setCurrentAmount: () => { }
   },
 
   ContextCurrentIndex: {
     currentIndex: -1,
-    setCurrentIndex: () => {}
+    setCurrentIndex: () => { }
   },
 
   ContextFunctions: {
-    handleMchangr: () => {},
-    handleNchangr: () => {},
+    handleMchangr: () => { },
+    handleNchangr: () => { },
     currentSum: () => [],
     currentRound: () => [],
-    makeTable: () => {return {}},
-    setTableAction: () => {},
-    clickCount: () => {},
-    addNewRow: () => {},
-    deletingRow: () => {},
-    convertRowToPercentage: () => {},
-    lightCloseAmount: () => {}
+    makeTable: () => { return {} },
+    setTableAction: () => { },
+    clickCount: () => { },
+    addNewRow: () => { },
+    deletingRow: () => { },
+    convertRowToPercentage: () => { },
+    lightCloseAmount: () => { }
   }
 })
 
 
-export const ContextProvaider = ({ children }: { children: any }) => {
-  const [mn, setMn] = useState({
-    m: 0,
-    n: 0
-  })
+export const ContextProvaider = (
+  { children }:
+    { children: any }
+) => {
+
+  const [mn, setMn] = useState(
+    {
+      m: 0,
+      n: 0
+    })
+
   const [table, setTable] = useState<ObjetInTable[][]>([[]])
   const [summ, setSumm] = useState<number[]>([])
   const [round, setRound] = useState<number[]>([])
   const [currentAmount, setCurrentAmount] = useState<number>(-1)
   const [currentIndex, setCurrentIndex] = useState<number>(-1)
 
-  const handleMchangr =(e: React.ChangeEvent<HTMLInputElement>)=> {
+  const handleMchangr = (e: React.ChangeEvent<HTMLInputElement>) => {
     let inputed = +e.target.value;
     if (inputed > 100) {
       inputed = 100;
     }
-    console.log(inputed)
-    setMn((current) => {return { n: current.n, m: inputed}})
+    setMn((current) => { return { n: current.n, m: inputed } })
   }
 
-  const handleNchangr =(e: React.ChangeEvent<HTMLInputElement>)=> {
+  const handleNchangr = (e: React.ChangeEvent<HTMLInputElement>) => {
     let inputed = +e.target.value;
     if (inputed > 100) {
       inputed = 100;
     }
-    console.log(inputed)
-    setMn((current) => {return { m: current.m, n: inputed}})
+    setMn((current) => { return { m: current.m, n: inputed } })
   }
 
   const currentSum = (all: any, m: number, n: number) => (all.length) ? Array.from({ length: all[0].length }, (_, j) => {
@@ -146,21 +150,18 @@ export const ContextProvaider = ({ children }: { children: any }) => {
     return Math.round((all[j].map((x: ObjetInTable) => x.amount).reduce((x: number, y: number) => x + y)) / all[j].length);
   })
 
-  const makeTable = ({m, n}: {m: number, n:number}) => {
+  const makeTable = ({ m, n }: { m: number, n: number }) => {
     let all: Array<Array<ObjetInTable>> = [];
 
     for (let i = 0; i < n; i++) {
-      const temp = Array.from({ length: m}, () => {
-        let random = Math.round(1/Math.random()*100);
+      const temp = Array.from({ length: m }, () => {
+        let random = Math.round(1 / Math.random() * 100);
         if (random > 1000) {
           random = Math.round(random / 10);
-          console.log("10");
-          
         }
 
         if (random > 10000) {
           random = Math.round(random / 100);
-          console.log("100");
         }
 
         return {
@@ -171,7 +172,7 @@ export const ContextProvaider = ({ children }: { children: any }) => {
 
       all = [...all, temp]
     }
-    if (m  > 0 && n > 0) {
+    if (m > 0 && n > 0) {
       setSumm(currentSum(all, m, n))
       setRound(currentRound(all, m, n))
     } else {
@@ -193,44 +194,44 @@ export const ContextProvaider = ({ children }: { children: any }) => {
   const clickCount = (item: ObjetInTable, table: ObjetInTable[][]) => {
     setTable(table
       .map(row => row
-        .map(box => (box.id === item.id) ? {...box, amount: box.amount + 1} : box
-    )));
+        .map(box => (box.id === item.id) ? { ...box, amount: box.amount + 1 } : box
+        )));
 
     setSumm(currentSum(table, table.length, table[0].length))
     setRound(currentRound(table, table.length, table[0].length))
   }
 
   const addNewRow = (table: ObjetInTable[][]) => {
-      const newItem = () => {
-        let random = Math.round(1/Math.random()*100);
-        if (random > 1000) {
-          random = Math.round(random / 10);
-        }
-
-        if (random > 10000) {
-          random = Math.round(random / 100);
-        }
-
-        return {
-          id: Math.random(),
-          amount: random
-        }
+    const newItem = () => {
+      let random = Math.round(1 / Math.random() * 100);
+      if (random > 1000) {
+        random = Math.round(random / 10);
       }
 
-      const newTeble = table.map(item => [...item, newItem()]);
+      if (random > 10000) {
+        random = Math.round(random / 100);
+      }
 
-     setTable(newTeble)
-     setSumm(currentSum(newTeble, newTeble.length, newTeble[0].length))
-     setRound(currentRound(newTeble, newTeble[0].length, newTeble.length))
+      return {
+        id: Math.random(),
+        amount: random
+      }
+    }
+
+    const newTeble = table.map(item => [...item, newItem()]);
+
+    setTable(newTeble)
+    setSumm(currentSum(newTeble, newTeble.length, newTeble[0].length))
+    setRound(currentRound(newTeble, newTeble[0].length, newTeble.length))
   }
 
   const deletingRow = (table: ObjetInTable[][]) => {
 
-      const newTeble = table.map(item => item.slice(0, -1));
+    const newTeble = table.map(item => item.slice(0, -1));
 
-     setTable(newTeble)
-     setSumm(currentSum(newTeble, newTeble.length, newTeble[0].length))
-     setRound(currentRound(newTeble, newTeble[0].length, newTeble.length))
+    setTable(newTeble)
+    setSumm(currentSum(newTeble, newTeble.length, newTeble[0].length))
+    setRound(currentRound(newTeble, newTeble[0].length, newTeble.length))
   }
 
   const convertRowToPercentage = (s: number) => {
@@ -288,7 +289,7 @@ export const ContextProvaider = ({ children }: { children: any }) => {
     }
   }
 
-  return(
+  return (
     <allContext.Provider value={contextValue}>
       {children}
     </allContext.Provider>

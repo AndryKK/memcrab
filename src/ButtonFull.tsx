@@ -19,7 +19,11 @@ export const ButtonFull = ({item}:{item: ObjetInTable}) => {
   return (
     <button
       key={Math.random()}
-      className={(Math.round(item.amount / 30) === Math.round(currentAmount / 30)) ? 'item light' : 'item'}
+      className={
+        (Math.round(item.amount / 30) === Math.round(currentAmount / 30))
+        ? 'item light'
+        : 'item'
+      }
       onClick={() => clickCount(item, table)}
       onMouseOver={() => lightCloseAmount(item.amount)}
       onMouseLeave={() => lightCloseAmount(-1)}
