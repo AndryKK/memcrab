@@ -1,38 +1,94 @@
 .App {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 auto;
+  margin: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.control {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.table__wrap {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 50px auto;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.main {
+  display: flex;
+  gap: 2px;
+}
+
+.summ {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.round {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.item {
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  border: 2px blue solid;
+  background-color: #fff;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.light {
+  background-color: yellow;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.percentage {
+  background-color: transparent;
+  position: relative;
+  color: darkgray;
 }
+
+.percentage--background {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0; bottom: 0;
+  left: 0; 
+  background-color: blue;
+  border-radius: 5px 0 0 5px;
+  width: 0%;
+}
+
+.item:active {
+  background-color: aquamarine;
+}
+
+.item--summ {
+  border: 2px red solid;
+}
+
+.item--round {
+  border: 2px olivedrab solid;
+}
+
