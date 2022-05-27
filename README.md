@@ -1,4 +1,4 @@
-# LINK
+# LINKS
 
 Open: [DEMO](https://andrykk.github.io/memcrab/)
 Open: [TASK](https://docs.memcrab.com/share/856a01a7-c84c-4753-98e4-ccb1e178b384)
