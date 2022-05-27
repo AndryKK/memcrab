@@ -1,3 +1,3 @@
 # LINK
 
-DEMO [Create React App](https://andrykk.github.io/memcrab/).
+[DEMO](https://andrykk.github.io/memcrab/).
