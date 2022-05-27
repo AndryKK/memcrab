@@ -1,7 +1,7 @@
 import './App.css';
-import { Controle } from './Controle';
-import { Table } from './Table';
-import { ContextProvaider } from "./Context"
+import { Controle } from './Controle/Controle';
+import { Table } from './Table/Table';
+import { ContextProvaider } from "./Context/Context"
 
 
 function App() {

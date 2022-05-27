@@ -1,109 +1,6 @@
-import React, { useState, Dispatch } from "react";
-import { ObjetInTable } from "./ObjetInTable";
-
-interface allContextType {
-  ContextMn: {
-    mn: {
-      m: number,
-      n: number
-    },
-
-    setMn: Dispatch<React.SetStateAction<{
-      m: number,
-      n: number
-    }>>,
-  },
-
-  ContexTable: {
-    table: ObjetInTable[][],
-    setTable: Dispatch<React.SetStateAction<ObjetInTable[][]>>
-  },
-
-  ContextSumm: {
-    summ: number[],
-    setSumm: Dispatch<React.SetStateAction<number[]>>
-  },
-
-  ContextRound: {
-    round: number[],
-    setRound: Dispatch<React.SetStateAction<number[]>>
-  },
-
-  ContextCurrentAmount: {
-    currentAmount: number,
-    setCurrentAmount: Dispatch<React.SetStateAction<number>>
-  },
-
-  ContextCurrentIndex: {
-    currentIndex: number,
-    setCurrentIndex: Dispatch<React.SetStateAction<number>>
-  },
-
-  ContextFunctions: {
-    handleMchangr: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    handleNchangr: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    currentSum: (all: any, m: number, n: number) => number[] | [],
-    currentRound: (all: any, n: number, m: number) => number[] | [],
-    makeTable: ({ m, n }: { m: number, n: number }) => {},
-    setTableAction: () => void,
-    clickCount: (item: ObjetInTable, table: ObjetInTable[][]) => void,
-    addNewRow: (table: ObjetInTable[][]) => void,
-    deletingRow: (table: ObjetInTable[][]) => void,
-    convertRowToPercentage: (n: number) => void,
-    lightCloseAmount: (amaunt: number) => void
-  }
-}
-
-export const allContext = React.createContext<allContextType>({
-  ContextMn: {
-    mn: {
-      m: 0,
-      n: 0
-    },
-
-    setMn: (a) => { },
-  },
-
-  ContexTable: {
-    table: [[]],
-    setTable: () => { }
-  },
-
-  ContextSumm: {
-    summ: [],
-    setSumm: () => { }
-  },
-
-  ContextRound: {
-    round: [],
-    setRound: () => { }
-  },
-
-  ContextCurrentAmount: {
-    currentAmount: -1,
-    setCurrentAmount: () => { }
-  },
-
-  ContextCurrentIndex: {
-    currentIndex: -1,
-    setCurrentIndex: () => { }
-  },
-
-  ContextFunctions: {
-    handleMchangr: () => { },
-    handleNchangr: () => { },
-    currentSum: () => [],
-    currentRound: () => [],
-    makeTable: () => { return {} },
-    setTableAction: () => { },
-    clickCount: () => { },
-    addNewRow: () => { },
-    deletingRow: () => { },
-    convertRowToPercentage: () => { },
-    lightCloseAmount: () => { }
-  }
-})
-
+import React, { useState } from "react";
+import { ObjetInTable } from "../Table/ObjetInTable";
+import { allContext } from "./allContext";
 
 export const ContextProvaider = (
   { children }:
@@ -127,6 +24,9 @@ export const ContextProvaider = (
     if (inputed > 100) {
       inputed = 100;
     }
+    if (inputed < 0) {
+      inputed = 0;
+    }
     setMn((current) => { return { n: current.n, m: inputed } })
   }
 
@@ -135,19 +35,26 @@ export const ContextProvaider = (
     if (inputed > 100) {
       inputed = 100;
     }
+    if (inputed < 0) {
+      inputed = 0;
+    }
     setMn((current) => { return { m: current.m, n: inputed } })
   }
 
-  const currentSum = (all: any, m: number, n: number) => (all.length) ? Array.from({ length: all[0].length }, (_, j) => {
-    let itemSum = 0;
-    for (let i = 0; i < all.length; i++) {
-      itemSum += all[i][j].amount;
-    }
-    return itemSum
+  const currentSum = (all: any, m: number, n: number) => (all.length) 
+    ? Array.from({ length: all[0].length }, (_, j) => {
+      let itemSum = 0;
+      for (let i = 0; i < all.length; i++) {
+        itemSum += all[i][j].amount;
+      }
+      return itemSum
   }) : [];
 
-  const currentRound = (all: any, n: number, m: number) => Array.from({ length: m }, (_, j) => {
-    return Math.round((all[j].map((x: ObjetInTable) => x.amount).reduce((x: number, y: number) => x + y)) / all[j].length);
+  const currentRound = (all: any, n: number, m: number) => 
+    Array.from({ length: m }, (_, j) => {
+      return Math.round((all[j]
+        .map((x: ObjetInTable) => x.amount)
+          .reduce((x: number, y: number) => x + y)) / all[j].length);
   })
 
   const makeTable = ({ m, n }: { m: number, n: number }) => {
@@ -194,8 +101,10 @@ export const ContextProvaider = (
   const clickCount = (item: ObjetInTable, table: ObjetInTable[][]) => {
     setTable(table
       .map(row => row
-        .map(box => (box.id === item.id) ? { ...box, amount: box.amount + 1 } : box
-        )));
+        .map(box => (box.id === item.id) 
+          ? { ...box, amount: box.amount + 1 }
+          : box
+      )));
 
     setSumm(currentSum(table, table.length, table[0].length))
     setRound(currentRound(table, table.length, table[0].length))

@@ -1,8 +1,9 @@
 import React from 'react';
-import { ButtonFull } from './ButtonFull';
-import { Button } from './Button';
+import { ButtonFull } from '../ButtonFull/ButtonFull';
+import { Button } from '../Button/Button';
 import { ObjetInTable } from './ObjetInTable';
-import { allContext } from './Context';
+import { allContext } from '../Context/allContext';
+import './Table.css'
 
 export const Table = () => {
 

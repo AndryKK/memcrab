@@ -1,5 +1,6 @@
 import React from 'react';
-import { allContext } from "./Context"
+import { allContext } from '../Context/allContext';
+import './Controle.css'
 
 export const Controle = () => {
   const {

@@ -1,6 +1,7 @@
 import React from 'react';
-import { ObjetInTable } from './ObjetInTable';
-import { allContext } from "./Context"
+import { ObjetInTable } from '../Table/ObjetInTable';
+import { allContext } from '../Context/allContext';
+
 
 export const Button = ({item}:{item: ObjetInTable}) => {
   const {
