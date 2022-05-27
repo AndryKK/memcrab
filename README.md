@@ -1,7 +1,7 @@
 # LINK
 
-[DEMO](https://andrykk.github.io/memcrab/)
-[Task](https://docs.memcrab.com/share/856a01a7-c84c-4753-98e4-ccb1e178b384)
+Open: [DEMO](https://andrykk.github.io/memcrab/)
+Open: [TASK](https://docs.memcrab.com/share/856a01a7-c84c-4753-98e4-ccb1e178b384)
 
 
 # Technologies
