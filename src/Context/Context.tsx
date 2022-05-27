@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { ObjetInTable } from "../Table/ObjetInTable";
 import { allContext } from "./allContext";
 
 export const ContextProvaider = (
   { children }:
-    { children: any }
+    { children: ReactNode }
 ) => {
 
   const [mn, setMn] = useState(
@@ -41,7 +41,7 @@ export const ContextProvaider = (
     setMn((current) => { return { m: current.m, n: inputed } })
   }
 
-  const currentSum = (all: any, m: number, n: number) => (all.length) 
+  const currentSum = (all: ObjetInTable[][], m: number, n: number) => (all.length) 
     ? Array.from({ length: all[0].length }, (_, j) => {
       let itemSum = 0;
       for (let i = 0; i < all.length; i++) {
@@ -50,7 +50,7 @@ export const ContextProvaider = (
       return itemSum
   }) : [];
 
-  const currentRound = (all: any, n: number, m: number) => 
+  const currentRound = (all: ObjetInTable[][], n: number, m: number) => 
     Array.from({ length: m }, (_, j) => {
       return Math.round((all[j]
         .map((x: ObjetInTable) => x.amount)

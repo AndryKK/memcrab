@@ -42,8 +42,8 @@ export interface allContextType {
   ContextFunctions: {
     handleMchangr: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleNchangr: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    currentSum: (all: any, m: number, n: number) => number[] | [];
-    currentRound: (all: any, n: number, m: number) => number[] | [];
+    currentSum: (all: ObjetInTable[][], m: number, n: number) => number[] | [];
+    currentRound: (all: ObjetInTable[][], n: number, m: number) => number[] | [];
     makeTable: ({ m, n }: { m: number; n: number; }) => {};
     setTableAction: () => void;
     clickCount: (item: ObjetInTable, table: ObjetInTable[][]) => void;

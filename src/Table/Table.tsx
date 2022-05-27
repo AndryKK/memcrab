@@ -29,7 +29,7 @@ export const Table = () => {
     <div className='table__wrap'>
       <div className='table'>
         <div className="main">
-          {table.map((width: any) => 
+          {table.map((width: ObjetInTable[]) => 
             <div key={Math.random()} className='row'>
                 {width.map((item: ObjetInTable) => (width.indexOf(item) !== currentIndex)
                   ? (<ButtonFull
